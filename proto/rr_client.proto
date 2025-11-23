@@ -22,7 +22,7 @@
 
 /**
  * designed to communicate with rr-client, and RyderRos robots.
- *
+ */
 
 syntax = "proto3";
 
