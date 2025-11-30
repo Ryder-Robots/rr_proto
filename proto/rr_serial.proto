@@ -20,14 +20,14 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-package org.ryderrobots.ros2.serial;
-
 /**
  * ROS2 communication messages to communicate with Arduino, and possibly other 
  * micro-controlers
  */
 
- syntax = "proto3";
+syntax = "proto3";
+
+package org.ryderrobots.ros2.serial;
 
 /**
  * sent by companion computer to trigger response of what sensors are 
