@@ -20,6 +20,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+package org.ryderrobots.ros2.serial;
+
 /**
  * ROS2 communication messages to communicate with Arduino, and possibly other 
  * micro-controlers
@@ -28,6 +30,68 @@
  syntax = "proto3";
 
 /**
- * @brief for each function there are request and response messages`
+ * sent by companion computer to trigger response of what sensors are 
+ * available.
+ *
+ * request sends a request for information from the micro-controller, it does
+ * not ask to set any parameters. command is an integer value that should
+ * match values that are explained in README.txt.
  */
+message Monitor {
+    int32 command = 1;
+}
+
+/**
+ * @brief  shows what features are available to micro-controller
+ *
+ * has_* flag indicates if a feature is supported by the micro-controller,
+ * *_status indicates if the feature/sensor is available for use, -1 not set,
+ * 0 ready, 1 indicates not yet available, 2 indicates failure
+ */
+message FeatureList {
+    bool has_gps = 1;
+    bool has_joy = 2;
+    bool has_batt_state = 3;
+    bool has_img = 4;
+    bool has_imu = 5;
+    bool has_ranges = 6;
+
+    int32 gps_status = 7;
+    int32 joy_status = 8;
+    int32 batt_state_status = 9;
+    int32 img_status = 10;
+    int32 ranges_status = 11;    
+}
+
+
+message Quaternion {
+    double x = 1;
+    double y = 2;
+    double z = 3;
+    double w = 4;  
+}
+
+message Vector3 {
+    double x = 1;
+    double y = 2;
+    double z = 3;
+}
+
+/**
+ * micro-controller response to MSP_RAW_IMU (102)
+ */
+message MspRawImu {
+    Quaternion orientation = 1;
+    repeated double orientation_covariance = 2;
+    Vector3 angular_velocity = 3;
+    repeated double angular_velocity_covariance = 4;
+    Vector3 linear_acceleration = 5;
+    repeated double linear_acceleration_covariance = 6;
+}
+
+message Response {
+    oneof data {
+        MspRawImu msp_raw_imu = 1;
+    }
+}
  
