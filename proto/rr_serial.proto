@@ -41,9 +41,16 @@ message Monitor {
     bool is_request = 1;
 }
 
+/**
+ * Possible error types for Bad requests
+ */
+enum ErrorType {
+    ET_UNKNOWN = 0;
+    ET_MAX_LEN_EXCEED = 1;
+}
+
 message BadRequest {
-    string title = 1;
-    repeated string errors = 2;
+    ErrorType etype = 1;
 }
 
 enum Status {
