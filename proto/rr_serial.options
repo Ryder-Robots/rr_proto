@@ -1,6 +1,6 @@
-/**
- * Used for specific protobuf options see (https://jpa.kapsi.fi/nanopb/docs/reference.html#defining-the-options-in-a-.options-file)
- */
+#
+# Used for specific protobuf options see (https://jpa.kapsi.fi/nanopb/docs/reference.html#defining-the-options-in-a-.options-file)
+#
 
 # Bad Request options
  BadRequest.title max_size:40
@@ -10,5 +10,5 @@
  MspRawImu.orientation_covariance max_count:9
  MspRawImu.angular_velocity_covariance max_count:9
  MspRawImu.linear_acceleration_covariance max_count:9
- 
+
 
