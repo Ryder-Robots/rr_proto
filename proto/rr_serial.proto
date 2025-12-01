@@ -102,6 +102,17 @@ message MspRawImu {
 }
 
 /**
+ * request for available features from the micro-processor. Can also be 
+ * be used to detect if a service that should be available has an error condition.
+ *
+ * Note that if a status is UNKNOWN, then it may not be configured, and for most
+ * sensors sending a monotor request will trigger its initlization.
+ */
+message MspIdent {
+    FeatureList feature_list = 1;
+}
+
+/**
  * Request sent to serial device.
  * 
  * Op code must match ones defined in README.
@@ -114,12 +125,14 @@ message Request {
 }
 
 /**
- * Returns payload given 
+ * Returns senswor payload, op code represents the payload that is returned.
  */
 message Response {
     int32 op = 1;
     oneof data {
-        MspRawImu msp_raw_imu = 2;
+        BadRequest bad_request = 2;
+        MspRawImu msp_raw_imu = 3;
+        MspIdent msp_ident = 4;
     }
 }
  
