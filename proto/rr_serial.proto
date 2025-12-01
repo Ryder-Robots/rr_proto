@@ -38,15 +38,27 @@ package org.ryderrobots.ros2.serial;
  * match values that are explained in README.txt.
  */
 message Monitor {
-    int32 command = 1;
+    bool is_request = 1;
+}
+
+message BadRequest {
+    string title = 1;
+    repeated string errors = 2;
+}
+
+enum Status {
+  UNKNOWN = 0;    // Default value, must be zero
+  READY = 1;
+  NOT_AVAILABLE = 2;
+  FAILURE = 3;
 }
 
 /**
  * @brief  shows what features are available to micro-controller
  *
  * has_* flag indicates if a feature is supported by the micro-controller,
- * *_status indicates if the feature/sensor is available for use, -1 not set,
- * 0 ready, 1 indicates not yet available, 2 indicates failure
+ * *_status indicates if the feature/sensor is available for use, this follows
+ * Status object as defined above.
  */
 message FeatureList {
     bool has_gps = 1;
@@ -56,11 +68,11 @@ message FeatureList {
     bool has_imu = 5;
     bool has_ranges = 6;
 
-    int32 gps_status = 7;
-    int32 joy_status = 8;
-    int32 batt_state_status = 9;
-    int32 img_status = 10;
-    int32 ranges_status = 11;    
+    Status gps_status = 7;
+    Status joy_status = 8;
+    Status batt_state_status = 9;
+    Status img_status = 10;
+    Status ranges_status = 11;    
 }
 
 
@@ -89,9 +101,25 @@ message MspRawImu {
     repeated double linear_acceleration_covariance = 6;
 }
 
-message Response {
+/**
+ * Request sent to serial device.
+ * 
+ * Op code must match ones defined in README.
+ */
+message Request {
+    int32 op = 1;
     oneof data {
-        MspRawImu msp_raw_imu = 1;
+        Monitor monitor = 2;
+    }
+}
+
+/**
+ * Returns payload given 
+ */
+message Response {
+    int32 op = 1;
+    oneof data {
+        MspRawImu msp_raw_imu = 2;
     }
 }
  
