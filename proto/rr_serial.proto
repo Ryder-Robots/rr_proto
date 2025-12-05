@@ -132,7 +132,7 @@ message Request {
 }
 
 /**
- * Returns senswor payload, op code represents the payload that is returned.
+ * Returns sensor payload, op code represents the payload that is returned.
  */
 message Response {
     int32 op = 1;

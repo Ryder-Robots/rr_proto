@@ -3,6 +3,7 @@
 #
 
 # MspRawImu options
-MspRawImu.orientation_covariance max_count:9
-MspRawImu.angular_velocity_covariance max_count:9
-MspRawImu.linear_acceleration_covariance max_count:9
+# MspRawImu.orientation_covariance max_count:9
+# MspRawImu.angular_velocity_covariance max_count:9
+# MspRawImu.linear_acceleration_covariance max_count:9
+
