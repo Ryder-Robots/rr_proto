@@ -48,6 +48,9 @@ enum ErrorType {
     ET_UNKNOWN = 0;
     ET_MAX_LEN_EXCEED = 1;
     ET_SERVICE_UNAVAILABLE = 2;
+    ET_UNKNOWN_OPERATION = 3;
+    ET_INVALID_REQUEST = 4;
+    ET_SERIAL_FAILURE = 5;
 }
 
 message BadRequest {
